@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 
 interface OrderItem {
@@ -154,16 +155,21 @@ const AdminDashboard = () => {
       </Card>
 
       <Dialog open={showSlipDialog} onOpenChange={setShowSlipDialog}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>สลิปการโอนเงิน</DialogTitle>
+            <DialogDescription>
+              ภาพสลิปการโอนเงินจากลูกค้า
+            </DialogDescription>
           </DialogHeader>
           {selectedOrder?.slip_image && (
-            <img
-              src={`/api/uploads/${selectedOrder.slip_image}`}
-              alt="สลิปการโอนเงิน"
-              className="w-full rounded"
-            />
+            <div className="max-h-[70vh] overflow-auto">
+              <img
+                src={selectedOrder.slip_image}
+                alt="สลิปการโอนเงิน"
+                className="w-full h-auto object-contain"
+              />
+            </div>
           )}
         </DialogContent>
       </Dialog>
@@ -172,6 +178,9 @@ const AdminDashboard = () => {
         <DialogContent className="max-w-3xl">
           <DialogHeader>
             <DialogTitle>รายละเอียดคำสั่งซื้อ #{selectedOrder?.id}</DialogTitle>
+            <DialogDescription>
+              แสดงข้อมูลการสั่งซื้อและรายการสินค้าทั้งหมด
+            </DialogDescription>
           </DialogHeader>
           {selectedOrder && (
             <div className="space-y-4">
