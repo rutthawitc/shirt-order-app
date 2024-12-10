@@ -10,7 +10,9 @@ function App() {
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="container mx-auto px-4">
           <header className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">ระบบสั่งจองเสื้อ</h1>
+            <h1 className="text-3xl font-bold text-gray-900">ระบบสั่งจองเสื้อ </h1>
+            <h2 className="text-xl font-semibold text-gray-700">Tiger Thailand Meeting 2025</h2>
+            <p className="text-red-600 mt-2">** เสื้อสำหรับใส่เข้างาน คือ แบบที่ 1 และ แบบที่ 2 เท่านั้น**</p>
             <p className="text-gray-600 mt-2">เลือกแบบและขนาดตามที่ต้องการ</p>
             <nav className="mt-4">
               <ul className="flex justify-center space-x-4">

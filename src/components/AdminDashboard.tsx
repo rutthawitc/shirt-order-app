@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Eye, FileImage } from "lucide-react";
+import { Download, Eye, FileImage } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -65,11 +65,43 @@ const AdminDashboard = () => {
     setShowSlipDialog(true);
   };
 
+  const handleExport = async () => {
+    try {
+        const response = await fetch('/api/orders/export');
+        if (!response.ok) {
+            throw new Error('การส่งออกข้อมูลล้มเหลว');
+        }
+
+        // ดาวน์โหลดไฟล์
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `orders_export_${new Date().toISOString().split('T')[0]}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+        console.error('Export error:', error);
+        // แสดง error message (ถ้ามี UI component สำหรับแสดง error)
+    }
+};
+
   return (
     <div className="container mx-auto py-8">
       <Card>
         <CardHeader>
           <CardTitle>รายการสั่งซื้อทั้งหมด</CardTitle>
+          <Button
+                        onClick={handleExport}
+                        variant="outline"
+                        className="flex items-center gap-2"
+                    >
+                        <Download className="h-4 w-4" />
+                        ส่งออกข้อมูล
+                    </Button>
         </CardHeader>
         <CardContent>
           <Table>

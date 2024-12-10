@@ -388,6 +388,22 @@ const ShirtOrderForm: React.FC = () => {
               ))}
             </div>
 
+            {/* แสดงราคารวม */}
+            <div className="text-right space-y-2">
+              <div className="text-xl font-semibold">
+                ราคารวมทั้งสิ้น: {calculateTotalPrice()} บาท
+              </div>
+            </div>
+              <div>
+              <div className="bg-gray-100 p-4 rounded-md">
+                <p className="text-lg font-semibold">ข้อมูลบัญชีสำหรับโอนเงิน</p>
+                <p className="text-sm">ชื่อบัญชี: นายสกล สกลสกล</p>
+                <p className="text-sm">เลขที่บัญชี: 123-456-7890</p>
+                <p className="text-sm">ธนาคาร: ธนาคารไทยพาณิชย์</p>
+              </div>
+              
+
+              </div>
             {/* ข้อมูลลูกค้า */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">ข้อมูลการจัดส่ง</h3>
@@ -500,23 +516,6 @@ const ShirtOrderForm: React.FC = () => {
                     </div>
                   )}
                 </div>
-              </div>
-            </div>
-
-            {/* แสดงราคารวม */}
-            <div className="text-right space-y-2">
-              <div className="text-sm text-gray-600">
-                ราคาสินค้ารวม:{" "}
-                {orderItems.reduce((total, item) => {
-                  const design = SHIRT_DESIGNS.find(
-                    (d) => d.id === item.design
-                  );
-                  return total + (design?.price ?? 0) * item.quantity;
-                }, 0)}{" "}
-                บาท
-              </div>
-              <div className="text-xl font-semibold">
-                ราคารวมทั้งสิ้น: {calculateTotalPrice()} บาท
               </div>
             </div>
 
