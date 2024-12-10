@@ -134,6 +134,7 @@ const AdminDashboard = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => viewSlipImage(order)}
+                      className="text-gray-600 hover:text-gray-900"
                     >
                       <FileImage className="h-4 w-4" />
                     </Button>
@@ -143,6 +144,7 @@ const AdminDashboard = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => viewOrderDetails(order)}
+                      className="text-gray-600 hover:text-gray-900"
                     >
                       <Eye className="h-4 w-4" />
                     </Button>
