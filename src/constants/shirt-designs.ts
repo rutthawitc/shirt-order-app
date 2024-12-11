@@ -5,6 +5,8 @@ import design2Front from '@/assets/images/shirts/design-2/front.jpg';
 import design2Back from '@/assets/images/shirts/design-2/back.jpg';
 import design3Front from '@/assets/images/shirts/design-3/front.jpg';
 import design3Back from '@/assets/images/shirts/design-3/back.jpg';
+import design4Front from '@/assets/images/shirts/design-4/front.jpg';
+import design4Back from '@/assets/images/shirts/design-4/back.jpg';
 
 export const SHIRT_DESIGNS = [
   { 
@@ -23,10 +25,17 @@ export const SHIRT_DESIGNS = [
   },
   { 
     id: '3', 
-    name: 'แบบที่ 3 เสื้อยืดที่ระลึก', 
-    price: 400,
-    description: 'เสื้อเชิ้ต ผ้า Oxford Premium',
+    name: 'แบบที่ 3 เสื้อใส่เข้างาน แพคคู่', 
+    price: 1100,
+    description: 'เสื้อโปโล ผ้า Cotton Premium',
     images: [design3Front, design3Back]
+  },
+  { 
+    id: '4', 
+    name: 'แบบที่ 4 เสื้อยืดที่ระลึก', 
+    price: 500,
+    description: 'เสื้อเชิ้ต ผ้า Oxford Premium',
+    images: [design4Front, design4Back]
   }
 ];
 

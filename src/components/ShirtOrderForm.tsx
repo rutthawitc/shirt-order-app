@@ -3,7 +3,7 @@ import React, { useState, ChangeEvent } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash, Upload, Check } from "lucide-react";
+import { Plus, Trash, Upload, Check } from 'lucide-react';
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Loader2, AlertCircle } from "lucide-react";
+import { Loader2, AlertCircle } from 'lucide-react';
 
 import type { OrderItem, CustomerInfo } from "@/types/order";
 import { SHIRT_DESIGNS, SIZES } from "@/constants/shirt-designs";
@@ -215,7 +215,7 @@ const ShirtOrderForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="w-full max-w-4xl mx-auto p-2 sm:p-4">
       <Card>
         <CardHeader>
           <CardTitle>สั่งจองเสื้อ</CardTitle>
@@ -234,7 +234,7 @@ const ShirtOrderForm: React.FC = () => {
               <h3 className="text-lg font-semibold mb-4">
                 แบบเสื้อที่มีให้เลือก
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 {SHIRT_DESIGNS.map((design) => (
                   <Card key={design.id} className="overflow-hidden">
                     <div className="grid grid-cols-2 gap-2 p-2">
@@ -277,10 +277,12 @@ const ShirtOrderForm: React.FC = () => {
               </div>
 
               {orderItems.map((item, index) => (
-                <Card key={index} className="p-4">
+                <Card key={index} className="p-2 sm:p-4">
                   <div className="space-y-4">
                     <div className="flex justify-between items-start">
-                      <h4 className="font-medium">รายการที่ {index + 1}</h4>
+                      <h4 className="font-medium text-sm sm:text-base">
+                        รายการที่ {index + 1}
+                      </h4>
                       {orderItems.length > 1 && (
                         <Button
                           type="button"
@@ -294,7 +296,7 @@ const ShirtOrderForm: React.FC = () => {
                       )}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
                       <div>
                         <label className="block mb-2">แบบเสื้อ</label>
                         <Select
@@ -366,7 +368,7 @@ const ShirtOrderForm: React.FC = () => {
                             ?.images[0]
                         }
                         alt="ตัวอย่างเสื้อที่เลือก"
-                        className="w-20 h-20 object-cover rounded"
+                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded"
                       />
                       <div className="text-right flex-1">
                         <div className="text-sm text-gray-600">
@@ -394,16 +396,13 @@ const ShirtOrderForm: React.FC = () => {
                 ราคารวมทั้งสิ้น: {calculateTotalPrice()} บาท
               </div>
             </div>
-              <div>
-              <div className="bg-gray-100 p-4 rounded-md">
-                <p className="text-lg font-semibold">ข้อมูลบัญชีสำหรับโอนเงิน</p>
-                <p className="text-sm">ชื่อบัญชี: นายสกล สกลสกล</p>
-                <p className="text-sm">เลขที่บัญชี: 123-456-7890</p>
-                <p className="text-sm">ธนาคาร: ธนาคารไทยพาณิชย์</p>
-              </div>
-              
+            <div className="bg-gray-100 p-3 sm:p-4 rounded-md text-sm sm:text-base">
+              <p className="font-semibold mb-2">ข้อมูลบัญชีสำหรับโอนเงิน</p>
+              <p>ชื่อบัญชี: นายกิตติพิชญ์ อึงสถิตถาวร</p>
+              <p>เลขที่บัญชี:   405-0-77689-8</p>
+              <p>ธนาคาร: ธนาคารกรุงไทย</p>
+            </div>
 
-              </div>
             {/* ข้อมูลลูกค้า */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">ข้อมูลการจัดส่ง</h3>
@@ -511,7 +510,7 @@ const ShirtOrderForm: React.FC = () => {
                       <img
                         src={previewImage}
                         alt="สลิปการโอนเงิน"
-                        className="max-w-xs rounded shadow"
+                        className="max-w-full sm:max-w-xs rounded shadow"
                       />
                     </div>
                   )}
