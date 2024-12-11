@@ -412,6 +412,7 @@ const ShirtOrderForm: React.FC = () => {
 
             {/* แสดงราคารวม */}
             <div className="text-right space-y-2">
+                <div className="text-sm text-red-500 font-semibold">ฟรีค่าจัดส่ง</div>
               <div className="text-xl font-semibold">
                 ราคารวมทั้งสิ้น: {calculateTotalPrice()} บาท
               </div>
@@ -463,10 +464,10 @@ const ShirtOrderForm: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2">
-                    ที่อยู่จัดส่ง{" "}
+                  <label className="block mb-2 text-red-500">
+                    ที่อยู่จัดส่ง + เบอร์โทร{" "}
                     {!customerInfo.isPickup && (
-                      <span className="text-sm text-gray-500">(ค่าจัดส่ง)</span>
+                      <span className="text-sm text-gray-500">(ฟรีค่าจัดส่ง)</span>
                     )}
                   </label>
                   <Textarea
