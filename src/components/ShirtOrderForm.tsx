@@ -3,10 +3,11 @@ import React, { useState, ChangeEvent } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash, Upload, Check } from 'lucide-react';
+import { Plus, Trash, Upload, Check } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { API_URL } from '@/config';
+import { API_URL } from "@/config";
+import SizeGuideCard from "./SizeGuideCard";
 
 import {
   Select,
@@ -25,10 +26,11 @@ import {
 } from "@/components/ui/dialog";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Loader2, AlertCircle } from 'lucide-react';
+import { Loader2, AlertCircle } from "lucide-react";
 
 import type { OrderItem, CustomerInfo } from "@/types/order";
 import { SHIRT_DESIGNS, SIZES } from "@/constants/shirt-designs";
+import SouvenirSizeGuideCard from "./SouvenirSizeGuideCard";
 
 const ShirtOrderForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -137,98 +139,97 @@ const ShirtOrderForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-   
+
     try {
       // Validate form
       if (!validateForm()) {
         return;
       }
-   
+
       setIsSubmitting(true);
-   
+
       // Prepare form data
       const formData = new FormData();
-   
+
       // Add customer info
       formData.append("name", customerInfo.name);
       formData.append("address", customerInfo.address);
       formData.append("isPickup", customerInfo.isPickup.toString());
-   
+
       // Add order items as JSON string
       formData.append("items", JSON.stringify(orderItems));
-   
+
       // Add total price
       const totalPrice = calculateTotalPrice();
       formData.append("totalPrice", totalPrice.toString());
-   
+
       // Add slip image if exists
       if (customerInfo.slipImage) {
         formData.append("slipImage", customerInfo.slipImage);
       }
-   
+
       console.log("Sending form data:", {
-        name: customerInfo.name, 
+        name: customerInfo.name,
         address: customerInfo.address,
         isPickup: customerInfo.isPickup,
         items: orderItems,
         totalPrice,
       });
-   
+
       const response = await fetch(`${API_URL}/api/order`, {
         method: "POST",
-        body: formData
+        body: formData,
       });
-   
-      console.log('Response status:', response.status);
+
+      console.log("Response status:", response.status);
       const text = await response.text();
-      console.log('Raw response:', text);
-   
+      console.log("Raw response:", text);
+
       // แปลง text เป็น JSON
       let data;
       try {
         data = JSON.parse(text);
       } catch (e) {
-        console.error('Failed to parse response:', e);
-        throw new Error('Invalid response from server');
+        console.error("Failed to parse response:", e);
+        throw new Error("Invalid response from server");
       }
-   
+
       if (!response.ok) {
-        throw new Error(data.error || "เกิดข้อผิดพลาดในการส่งคำสั่งซื้อ"); 
+        throw new Error(data.error || "เกิดข้อผิดพลาดในการส่งคำสั่งซื้อ");
       }
-   
+
       console.log("Order submitted successfully:", data);
-   
+
       setShowSuccess(true);
-   
+
       // Reset form
       setOrderItems([
         {
           design: "1",
-          size: "M", 
+          size: "M",
           quantity: 1,
         },
       ]);
-   
+
       setCustomerInfo({
         name: "",
         address: "",
         slipImage: null,
         isPickup: false,
       });
-   
+
       setPreviewImage(null);
-   
     } catch (error) {
       console.error("Detailed error:", error);
       setError(
-        error instanceof Error 
-          ? error.message 
+        error instanceof Error
+          ? error.message
           : "เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ"
       );
     } finally {
       setIsSubmitting(false);
     }
-   };
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto p-2 sm:p-4">
@@ -277,6 +278,9 @@ const ShirtOrderForm: React.FC = () => {
                 ))}
               </div>
             </div>
+            {/* เพิ่มตารางขนาดเสื้อ */}
+            <SizeGuideCard />
+            <SouvenirSizeGuideCard />
 
             {/* รายการสั่งซื้อเสื้อ */}
             <div className="space-y-4">
@@ -415,7 +419,7 @@ const ShirtOrderForm: React.FC = () => {
             <div className="bg-gray-100 p-3 sm:p-4 rounded-md text-sm sm:text-base">
               <p className="font-semibold mb-2">ข้อมูลบัญชีสำหรับโอนเงิน</p>
               <p>ชื่อบัญชี: นายกิตติพิชญ์ อึงสถิตถาวร</p>
-              <p>เลขที่บัญชี:   405-0-77689-8</p>
+              <p>เลขที่บัญชี: 405-0-77689-8</p>
               <p>ธนาคาร: ธนาคารกรุงไทย</p>
             </div>
 
