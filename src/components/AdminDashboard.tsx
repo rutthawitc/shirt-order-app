@@ -1,7 +1,8 @@
+// src/components/AdminDashboard.tsx
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, Eye, FileImage, Check } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { API_URL } from '@/config';
 import AdminOrderTable from '@/components/AdminOrderTable';
 
 interface OrderItem {
@@ -42,8 +44,20 @@ const AdminDashboard = () => {
   
   const fetchOrders = async () => {
     try {
-      const response = await fetch('/api/orders');
-      const data = await response.json();
+      const response = await fetch(`${API_URL}/api/orders`);
+      console.log('Response status:', response.status);
+      
+      const text = await response.text();
+      console.log('Raw response:', text);
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error('Failed to parse response:', e);
+        throw new Error('Invalid response from server');
+      }
+
       setOrders(data);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -62,7 +76,7 @@ const AdminDashboard = () => {
 
   const handleExport = async () => {
     try {
-      const response = await fetch('/api/orders/export');
+      const response = await fetch(`${API_URL}/api/orders/export`);
       if (!response.ok) {
         throw new Error('การส่งออกข้อมูลล้มเหลว');
       }
