@@ -13,6 +13,8 @@ function App() {
             <h1 className="text-3xl font-bold text-gray-900">ระบบสั่งจองเสื้อ </h1>
             <h2 className="text-xl font-semibold text-gray-700">Tiger Thailand Meeting 2025</h2>
             <p className="text-red-600 mt-2">** เสื้อสำหรับใส่เข้างาน คือ แบบที่ 1 และ แบบที่ 2 เท่านั้น**</p>
+            <p className="text-orange-600 mt-2">** สั่งได้ตั้งแต่วันนี้ จนถึง 10 มกราคม 2568 **</p>
+            
             <p className="text-gray-600 mt-2">เลือกแบบและขนาดตามที่ต้องการ</p>
             <nav className="mt-4">
               <ul className="flex justify-center space-x-4">
@@ -24,14 +26,14 @@ function App() {
                     หน้าสั่งซื้อ
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link 
                     to="/admin" 
                     className="text-blue-600 hover:text-blue-800"
                   >
                     จัดการออเดอร์
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </header>
@@ -39,7 +41,7 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<ShirtOrderForm />} />
-              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/teadminorders" element={<AdminDashboard />} />
             </Routes>
           </main>
 
