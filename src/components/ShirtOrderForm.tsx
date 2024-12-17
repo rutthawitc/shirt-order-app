@@ -557,7 +557,7 @@ const ShirtOrderForm: React.FC = () => {
           <DialogHeader>
             <DialogTitle>สั่งซื้อสำเร็จ</DialogTitle>
             <DialogDescription>
-              ขอบคุณสำหรับการสั่งซื้อ เราได้รับคำสั่งซื้อของคุณเรียบร้อยแล้ว
+              ขอบคุณสำหรับการสั่งซื้อ Tiger E-San ได้รับคำสั่งซื้อของคุณเรียบร้อยแล้ว
             </DialogDescription>
           </DialogHeader>
           <Button onClick={() => setShowSuccess(false)}>ปิด</Button>
